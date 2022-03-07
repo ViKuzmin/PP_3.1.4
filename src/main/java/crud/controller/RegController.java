@@ -39,6 +39,7 @@ public class RegController {
 
         user.setActive(true);
         user.setRoles(Collections.singleton(new Role("ROLE_USER")));
+        //user.setRoles(Collections.singleton(new Role("ROLE_ADMIN")));
         userService.save(user);
 
         return "redirect:login";

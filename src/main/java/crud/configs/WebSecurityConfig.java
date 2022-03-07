@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                     .permitAll();
     }*/
-
+    //Work v.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/reg").permitAll()
                     .anyRequest().authenticated()
                 .and()
-                    .formLogin().defaultSuccessUrl("/users",true).failureUrl("/login")
+                    .formLogin().defaultSuccessUrl("/user",true).failureUrl("/login")
                     .loginPage("/login")
                     .permitAll()
                 .and()
@@ -67,6 +67,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .build();
 
         return new InMemoryUserDetailsManager(user);
+    }*/
+
+    /*@Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf()
+                .disable()
+                .authorizeRequests()
+                //Доступ только для не зарегистрированных пользователей
+                .antMatchers("/reg").not().fullyAuthenticated()
+                //Доступ только для пользователей с ролью Администратор
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user").hasRole("USER")
+                //Доступ разрешен всем пользователей
+                .antMatchers("/", "/user/**").permitAll()
+                //Все остальные страницы требуют аутентификации
+                .anyRequest().authenticated()
+                .and()
+                //Настройка для входа в систему
+                .formLogin()
+                .loginPage("/login")
+                //Перенарпавление на главную страницу после успешного входа
+                .defaultSuccessUrl("/")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
+                .logoutSuccessUrl("/");
     }*/
 
     @Override
