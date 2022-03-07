@@ -6,15 +6,10 @@
     <title>Users</title>
 </head>
 <body>
-
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<!--<a th:each="user : ${users}">
-    <h1 th:text=""></h1>
-</a>-->
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout"/>
 </form>
-
 </form>
 <table class="table table-dark table-hover">
     <thead>
@@ -28,23 +23,18 @@
     <tbody>
     <tr th:each="user : ${users}">
         <td th:text="${user.id}">id</td>
-        <!--<td th:text="${user.name}">Name</td>
-        <td th:text="${user.profession}">Profession</td>
-        <td th:text="${user.age}">Age</td>-->
         <td th:text="${user.username}">username</td>
         <td>
-            <a th:href="@{/user/{id}/edit(id=${user.id})}">Update</a>
+            <a th:href="@{/admin/{id}/edit(id=${user.id})}">Update</a>
         </td>
-
         <td>
-            <form th:method="DELETE" th:action="@{/user/{id}(id=${user.id})}">
+            <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
                 <input type="submit" value="Delete"/>
             </form>
         </td>
     </tr>
     </tbody>
 </table>
-
-<a th:href="@{/user/new}">Create user</a>
+<a th:href="@{/admin/new}">Create user</a>
 </body>
 </html>
