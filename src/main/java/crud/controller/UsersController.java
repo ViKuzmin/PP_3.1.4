@@ -1,6 +1,6 @@
 package crud.controller;
 
-import crud.models.UserEntity;
+import crud.models.User;
 import crud.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UsersController {
 
-    private UserServiceImpl userServiceImpl;
+    private final UserServiceImpl userServiceImpl;
 
     @Autowired
     public UsersController(UserServiceImpl userServiceImpl) {
@@ -21,11 +21,11 @@ public class UsersController {
     @GetMapping
     public String getAllUsers(Model model) {
         model.addAttribute("users", userServiceImpl.findAll());
-        return "users";
+        return "user";
     }
 
     @GetMapping("/new")
-    public String addUserView(@ModelAttribute("user") UserEntity user) {
+    public String addUserView(@ModelAttribute("user") User user) {
         return "new";
     }
 
@@ -36,20 +36,20 @@ public class UsersController {
     }
 
     @PostMapping
-    public String addUser(@ModelAttribute("user") UserEntity user) {
+    public String addUser(@ModelAttribute("user") User user) {
         userServiceImpl.save(user);
-        return "redirect:/users";
+        return "redirect:/user";
     }
 
     @PutMapping("/{id}")
-    public String updateUser(@ModelAttribute UserEntity user, @PathVariable long id) {
+    public String updateUser(@ModelAttribute User user, @PathVariable long id) {
         userServiceImpl.save(user);
-        return "redirect:/users";
+        return "redirect:/user";
     }
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable long id) {
         userServiceImpl.delete(id);
-        return "redirect:/users";
+        return "redirect:/user";
     }
 }
