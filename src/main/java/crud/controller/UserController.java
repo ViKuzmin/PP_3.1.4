@@ -14,17 +14,10 @@ public class UserController {
 
     private final UserServiceImpl userServiceImpl;
 
-
     @Autowired
     public UserController(UserServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;
     }
-
-    /*@GetMapping("/{id}")
-    public String show(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userServiceImpl.findById(id));
-        return "user";
-    }*/
 
     @GetMapping
     public String showUs(Model model, Authentication aut) {

@@ -25,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public WebSecurityConfig(SuccessUserHandler successUserHandler) {
         this.successUserHandler = successUserHandler;
     }
+
     @Autowired
     private DataSource dataSource;
 
@@ -33,30 +34,43 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserServiceImpl userService;
 
     //Test
-
-    //private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
+    /*@Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        *//*http
+                .authorizeRequests()
+                .antMatchers("/", "/reg").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().successHandler(successUserHandler)
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
+    }*//*
+
+        //work
+    *//*@Override
+    protected void configure(HttpSecurity http) throws Exception {
+        *//**//*http
                     .authorizeRequests()
-                    .antMatchers("/", "/index", "/reg").permitAll()
+                    .antMatchers("/", "/reg").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin().successHandler(successUserHandler)
                     .permitAll()
                 .and()
                     .logout()
-                    .permitAll();
-    }
+                    .permitAll();*//*
+    }*/
+
 
     //Work
-    /*@Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
@@ -69,7 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .permitAll();
-    }*/
+    }
 
     /*@Bean
     @Override
@@ -112,6 +126,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .logoutSuccessUrl("/");
     }*/
+
 
     //Work
    /* @Override

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<div>
+    xmln:
+        <h4><a href="/logout">Logout</a></h4>
+        <h4><a href="/reg">Registration</a></h4>
+        <h4><a href="/user">User</a></h4>
+        <h4><a href="/admin">Admin menu</a></h4>
+
+</div>
+</body>
+</html>

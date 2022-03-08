@@ -6,11 +6,13 @@
 </head>
 <body>
 <div>
-    xmln:
-        <h4><a href="/login">Login</a></h4>
-        <h4><a href="/reg">Registration</a></h4>
-        <h4><a href="/user">User</a></h4>
-        <h4><a href="/admin">Admin menu</a></h4>
+    Main page
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+
+    <h4><a href="/user">User</a></h4>
+    <h4><a href="/admin">Admin menu</a></h4>
 
 </div>
 </body>
