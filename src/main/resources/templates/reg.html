@@ -16,7 +16,7 @@ Add new user
     {{message}}
 {{\message}}
 <form th:action="@{/reg}" method="post">
-    <label th:text="${message}"></label>
+    <label th:text="${userForm}"></label>
     <div><label> Username : <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
     <input type="hidden" name="_csrf" value="{{_csrf.token}}" />

@@ -20,15 +20,15 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserDetailsService {
 
-
     @PersistenceContext
     private EntityManager em;
     final
     UsersRepository userRepository;
     final
     RoleRepository roleRepository;
+
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private  BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserServiceImpl(UsersRepository userRepository, RoleRepository roleRepository) {

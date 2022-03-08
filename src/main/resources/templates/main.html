@@ -5,6 +5,7 @@
     <title>Main</title>
 </head>
 <body>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 <div>
     Main page
     <form th:action="@{/logout}" method="post">

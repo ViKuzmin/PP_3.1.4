@@ -1,5 +1,7 @@
 package crud.configs;
 
+import crud.models.Role;
+import crud.models.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -18,22 +20,25 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-       /* if (roles.contains("ROLE_USER")) {
+
+        if (roles.contains("USER")) {
             httpServletResponse.sendRedirect("/user");
-        } else if (roles.contains("ROLE_ADMIN")) {
+        } else {
             httpServletResponse.sendRedirect("/admin");
-        } else {
-            httpServletResponse.sendRedirect("/");
-        }*/
-        /*if (roles.contains("ROLE_ADMIN")) {
-            httpServletResponse.sendRedirect("/admin");
-        } else {
-            httpServletResponse.sendRedirect("/user");
-        }*/
-        if (roles.contains("ROLE_USER")) {
-            httpServletResponse.sendRedirect("/user");
-        } else {
-            httpServletResponse.sendRedirect("/");
         }
+
+        /*User user = (User) authentication.getPrincipal();
+        Set<Role> roleSet = user.getRoles();
+
+        for (Role r : roleSet
+        ) {
+            if (r.getName().contains("User")) {
+                httpServletResponse.sendRedirect("/user");
+                break;
+            }
+        }*/
+
+        //httpServletResponse.sendRedirect("/user");
+
     }
 }

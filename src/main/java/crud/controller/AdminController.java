@@ -3,12 +3,15 @@ package crud.controller;
 import crud.models.User;
 import crud.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//@PreAuthorize("hasAnyRole('ROLE_USER, ROLE_ADMIN')")
 public class AdminController {
 
     private final UserServiceImpl userServiceImpl;

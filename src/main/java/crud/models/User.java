@@ -21,18 +21,25 @@ public class User implements UserDetails {
    private String username;
    @Column
    private String password;
-/*   @Column
-   private boolean active;*/
    @Transient
    private String passwordConfirm;
-   /*@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-   private Set<Role> roles;*/
    @ManyToMany(fetch = FetchType.EAGER)
    private Set<Role> roles;
 
+   public User() {
+   }
+
+   public Long getId() {
+      return id;
+   }
+
+   public void setId(Long id) {
+      this.id = id;
+   }
+
    @Override
-   public Collection<? extends GrantedAuthority> getAuthorities() {
-      return null;
+   public String getUsername() {
+      return username;
    }
 
    @Override
@@ -53,5 +60,39 @@ public class User implements UserDetails {
    @Override
    public boolean isEnabled() {
       return true;
+   }
+
+   public void setUsername(String username) {
+      this.username = username;
+   }
+
+   @Override
+   public Collection<? extends GrantedAuthority> getAuthorities() {
+      return getRoles();
+   }
+
+   @Override
+   public String getPassword() {
+      return password;
+   }
+
+   public void setPassword(String password) {
+      this.password = password;
+   }
+
+   public String getPasswordConfirm() {
+      return passwordConfirm;
+   }
+
+   public void setPasswordConfirm(String passwordConfirm) {
+      this.passwordConfirm = passwordConfirm;
+   }
+
+   public Set<Role> getRoles() {
+      return roles;
+   }
+
+   public void setRoles(Set<Role> roles) {
+      this.roles = roles;
    }
 }

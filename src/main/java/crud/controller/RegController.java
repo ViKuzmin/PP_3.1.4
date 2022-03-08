@@ -2,15 +2,16 @@ package crud.controller;
 
 import crud.models.Role;
 import crud.models.User;
-import crud.repository.UsersRepository;
 import crud.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
-import java.util.Map;
+import javax.validation.Valid;
 
 @Controller
 public class RegController {
@@ -18,30 +19,28 @@ public class RegController {
     @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
-    private UsersRepository usersRepository;
-
     @GetMapping("/reg")
-    public String reg() {
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
 
         return "reg";
     }
 
     @PostMapping("/reg")
-    public String addUser(User user, Map<String, Object> model) {
+    public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
 
-        User userFromDB = userService.findByUsername(user.getUsername());
-
-        if (userFromDB != null) {
-            model.put("message", "User already exists");
+        if (bindingResult.hasErrors()) {
+            return "reg";
+        }
+        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
+            model.addAttribute("passwordError", "Пароли не совпадают");
+            return "reg";
+        }
+        if (!userService.save(userForm)){
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "reg";
         }
 
-        //user.setActive(true);
-        user.setRoles(Collections.singleton(new Role(1L,"ROLE_USER")));
-        //user.setRoles(Collections.singleton(new Role("ROLE_ADMIN")));
-        userService.save(user);
-
-        return "redirect:login";
+        return "redirect:/";
     }
 }
