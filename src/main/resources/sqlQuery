@@ -1,0 +1,20 @@
+INSERT INTO public.t_role(id, name)
+  VALUES (1, 'ROLE_USER'), (2, 'ROLE_ADMIN');
+
+
+  INSERT INTO public.t_user_roles(user_id, roles_id)
+    VALUES (1, 2);
+
+INSERT INTO users VALUES (1, 'proselyte', '$2a$10$rdN6xc3hOZ4h2cubTw5RU.CpmDZzSJt3h3izVGNt6XG.c6QY0qM.C');
+
+INSERT INTO roles VALUES (1, 'ROLE_USER');
+INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
+
+INSERT INTO user_roles VALUES (1, 2);
+
+INSERT INTO users VALUES (1, 'proselyte', '$2a$10$rdN6xc3hOZ4h2cubTw5RU.CpmDZzSJt3h3izVGNt6XG.c6QY0qM.C');
+
+INSERT INTO roles VALUES (1, 'ROLE_USER');
+INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
+
+INSERT INTO user_roles VALUES (1, 2);

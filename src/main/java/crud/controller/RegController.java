@@ -37,8 +37,8 @@ public class RegController {
             return "reg";
         }
 
-        user.setActive(true);
-        user.setRoles(Collections.singleton(new Role("ROLE_USER")));
+        //user.setActive(true);
+        user.setRoles(Collections.singleton(new Role(1L,"ROLE_USER")));
         //user.setRoles(Collections.singleton(new Role("ROLE_ADMIN")));
         userService.save(user);
 

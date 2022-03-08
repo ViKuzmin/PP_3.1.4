@@ -18,16 +18,16 @@ public class User implements UserDetails {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
    @Column
-   @Size(min = 2, message = "Не меньше 5 знаков")
    private String username;
    @Column
-   @Size(min = 2, message = "Не меньше 5 знаков")
    private String password;
-   @Column
-   private boolean active;
+/*   @Column
+   private boolean active;*/
    @Transient
    private String passwordConfirm;
-   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+   /*@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+   private Set<Role> roles;*/
+   @ManyToMany(fetch = FetchType.EAGER)
    private Set<Role> roles;
 
    @Override
@@ -37,21 +37,21 @@ public class User implements UserDetails {
 
    @Override
    public boolean isAccountNonExpired() {
-      return false;
+      return true;
    }
 
    @Override
    public boolean isAccountNonLocked() {
-      return false;
+      return true;
    }
 
    @Override
    public boolean isCredentialsNonExpired() {
-      return false;
+      return true;
    }
 
    @Override
    public boolean isEnabled() {
-      return false;
+      return true;
    }
 }
