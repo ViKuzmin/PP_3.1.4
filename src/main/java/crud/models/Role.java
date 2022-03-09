@@ -12,6 +12,15 @@ import java.util.Set;
 @Table(name = "role")
 public class Role implements GrantedAuthority {
 
+    //Добавление ролей и назначение роли админа
+    /*
+
+    INSERT INTO user.role(id, name)
+    VALUES (1, 'ROLE_USER'), (2, 'ROLE_ADMIN');
+
+    INSERT INTO user.t_user_roles(user_id, roles_id)
+    VALUES (1, 2);
+    */
     @Id
     private Long id;
     @Column
@@ -30,30 +39,6 @@ public class Role implements GrantedAuthority {
     public Role(Long id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     @Override

@@ -5,8 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -27,14 +25,6 @@ public class User implements UserDetails {
    private Set<Role> roles;
 
    public User() {
-   }
-
-   public Long getId() {
-      return id;
-   }
-
-   public void setId(Long id) {
-      this.id = id;
    }
 
    @Override
@@ -62,10 +52,6 @@ public class User implements UserDetails {
       return true;
    }
 
-   public void setUsername(String username) {
-      this.username = username;
-   }
-
    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {
       return getRoles();
@@ -74,25 +60,5 @@ public class User implements UserDetails {
    @Override
    public String getPassword() {
       return password;
-   }
-
-   public void setPassword(String password) {
-      this.password = password;
-   }
-
-   public String getPasswordConfirm() {
-      return passwordConfirm;
-   }
-
-   public void setPasswordConfirm(String passwordConfirm) {
-      this.passwordConfirm = passwordConfirm;
-   }
-
-   public Set<Role> getRoles() {
-      return roles;
-   }
-
-   public void setRoles(Set<Role> roles) {
-      this.roles = roles;
    }
 }

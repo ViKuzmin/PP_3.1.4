@@ -1,6 +1,5 @@
 package crud.controller;
 
-import crud.models.Role;
 import crud.models.User;
 import crud.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
