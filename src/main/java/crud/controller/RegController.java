@@ -21,7 +21,6 @@ public class RegController {
     @GetMapping("/reg")
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-
         return "reg";
     }
 

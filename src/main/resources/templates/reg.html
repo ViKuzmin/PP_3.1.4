@@ -12,13 +12,15 @@
     You have been logged out.
 </div>
 Add new user
-{{#message}}
-    {{message}}
-{{\message}}
+<!--{{#message}}
+{{message}}
+{{\message}}-->
 <form th:action="@{/reg}" method="post">
     <label th:text="${userForm}"></label>
     <div><label> Username : <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
+    <div><label> Password confirm: <input type="password" name="passwordConfirm"/> </label></div>
+
     <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
     <div><input type="submit" value="Create"/></div>
 </form>
