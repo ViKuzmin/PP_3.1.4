@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @PersistenceContext
     private EntityManager em;
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserDetailsService {
         return false;
     }
 
-    public List<User> usergtList(Long idMin) {
+    public List<User> usergetList(Long idMin) {
         return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
                 .setParameter("paramId", idMin).getResultList();
     }

@@ -15,7 +15,10 @@
     <thead>
     <tr>
         <th>Id</th>
-        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Age</th>
+        <th>Email</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
@@ -23,6 +26,9 @@
     <tbody>
     <tr th:each="user : ${users}">
         <td th:text="${user.id}">id</td>
+        <td th:text="${user.firstName}">id</td>
+        <td th:text="${user.lastName}">id</td>
+        <td th:text="${user.age}">id</td>
         <td th:text="${user.username}">username</td>
         <td>
             <a th:href="@{/admin/{id}/edit(id=${user.id})}">Update</a>

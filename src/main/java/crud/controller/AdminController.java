@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
@@ -43,7 +46,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public String updateUser(@ModelAttribute User user, @PathVariable long id) {
         userServiceImpl.save(user);
         return "redirect:/admin";
