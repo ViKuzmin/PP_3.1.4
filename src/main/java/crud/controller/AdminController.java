@@ -1,5 +1,6 @@
 package crud.controller;
 
+import crud.models.Role;
 import crud.models.User;
 import crud.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,14 +35,23 @@ public class AdminController {
 
         User autUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = new User();
+        Role roleUser = new Role(1L, "ROLE_USER");
+        Role roleAdmin = new Role(2L, "ROLE_ADMIN");
+
+        /*Set<Role> roles = new HashSet<>();
+        roles.add(roleUser);
+        roles.add(roleAdmin);*/
 
         model.addAttribute("users", userServiceImpl.findAll());
         model.addAttribute("authUser", autUser);
         model.addAttribute("user", user);
+       // model.addAttribute("roles", roles);
+        model.addAttribute("roleUser", roleUser);
+        model.addAttribute("roleAdmin", roleAdmin);
         return "admin";
     }
 
-    @GetMapping("/new")
+    /*@GetMapping("/new")
     public String addUserView(@ModelAttribute("user") User user) {
         return "new";
     }
@@ -48,7 +60,7 @@ public class AdminController {
     public String updateUserPage(Model model, @PathVariable long id) {
         model.addAttribute("user", userServiceImpl.findById(id));
         return "edit";
-    }
+    }*/
 
     @PostMapping
     public String addUser(@ModelAttribute("user") User user) {
