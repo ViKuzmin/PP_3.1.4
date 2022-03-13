@@ -10,9 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Controller
 @RequestMapping("/admin")
 //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -30,19 +27,11 @@ public class AdminController {
 
         User autUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = new User();
-        Role roleUser = new Role(1L, "ROLE_USER");
-        Role roleAdmin = new Role(2L, "ROLE_ADMIN");
-
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleUser);
-        roles.add(roleAdmin);
 
         model.addAttribute("users", userServiceImpl.findAll());
         model.addAttribute("authUser", autUser);
         model.addAttribute("user", user);
-        model.addAttribute("availableRoles", roles);
-        model.addAttribute("roleUser", roleUser);
-        model.addAttribute("roleAdmin", roleAdmin);
+        model.addAttribute("availableRoles", Role.getRole());
 
         return "admin";
     }
@@ -55,7 +44,7 @@ public class AdminController {
 
     @PatchMapping("/{id}")
     public String updateUser(@ModelAttribute User user, @PathVariable long id) {
-        userServiceImpl.save(user);
+        userServiceImpl.update(user);
         return "redirect:/admin";
     }
 

@@ -42,6 +42,13 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
+    public static Set<Role> getRole() {
+        Set<Role> roles = new HashSet<>();
+        roles.add(new Role(1L, "ROLE_USER"));
+        roles.add(new Role(2L, "ROLE_ADMIN"));
+        return roles;
+    }
+
     @Override
     public String getAuthority() {
         return getName();

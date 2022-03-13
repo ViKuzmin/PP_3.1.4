@@ -108,7 +108,7 @@
                                                                         <div class="form-group">
                                                                             <label for="role1"><b>Role</b></label>
                                                                             <select th:field="*{roles}" size="2" multiple class="form-control" id="role1">
-                                                                                <option th:each="role : ${availableRoles}" th:text="${role.toString()}" th:value="${role.id}"></option>
+                                                                                <option th:each="role : ${availableRoles}" th:text="${role.toString()}" th:value="${role.id}">v</option>
                                                                             </select>
                                                                         </div>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -196,12 +196,6 @@
                                                 <label for="password"><b>Password</b></label>
                                                 <input type="password" class="form-control" th:field="*{password}" id="password"/>
                                             </div>
-                                            <!--<div class="form-group">
-                                                <label for="role"><b>Role</b></label>
-                                                <select th:field="*{roles}" size="2" multiple class="form-control" id="role">
-                                                    <option th:each="role : ${availableRoles}" th:text="${role.toString()}" th:value="${role.id}">User</option>
-                                                </select>
-                                            </div>-->
                                             <div class="form-group">
                                                 <label for="role"><b>Role</b></label>
                                                 <select th:field="*{roles}" size="2" multiple class="form-control" id="role">
