@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -63,7 +61,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return false;
         }
 
-        user.setRoles(Collections.singleton(new Role( 1L, "ROLE_USER")));
+        //user.setRoles(Collections.singleton(new Role( 1L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
