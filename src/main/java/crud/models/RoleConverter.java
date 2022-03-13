@@ -14,8 +14,8 @@ public class RoleConverter implements Converter<String, Role> {
 
         int parsedId = Integer.parseInt(id);
         List<Role> list = Arrays.asList(
-          new Role(1L, "ROLE_USER"),
-          new Role(2L, "ROLE_Admin")
+          new Role(1L, "USER"),
+          new Role(2L, "Admin")
         );
         int index = parsedId - 1;
         return list.get(index);

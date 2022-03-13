@@ -44,8 +44,8 @@ public class Role implements GrantedAuthority {
 
     public static Set<Role> getRole() {
         Set<Role> roles = new HashSet<>();
-        roles.add(new Role(1L, "ROLE_USER"));
-        roles.add(new Role(2L, "ROLE_ADMIN"));
+        roles.add(new Role(1L, "USER"));
+        roles.add(new Role(2L, "ADMIN"));
         return roles;
     }
 
@@ -56,6 +56,6 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return name.replace("ROLE_", "");
+        return name;
     }
 }
