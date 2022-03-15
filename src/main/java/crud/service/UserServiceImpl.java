@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
         if (userFromDB != null) {
+
             return false;
         }
         //user.setRoles(Collections.singleton(new Role( 1L, "ROLE_USER")));

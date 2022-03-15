@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
 
-//@Data
+@Data
 @Entity
 @Table(name = "t_user")
 public class User implements UserDetails {
@@ -82,7 +82,7 @@ public class User implements UserDetails {
       return password;
    }
 
-   public void setId(Long id) {
+   /*public void setId(Long id) {
       this.id = id;
    }
 
@@ -136,7 +136,7 @@ public class User implements UserDetails {
 
    public void setRoles(Set<Role> roles) {
       this.roles = roles;
-   }
+   }*/
 
    @Override
    public boolean equals(Object o) {
