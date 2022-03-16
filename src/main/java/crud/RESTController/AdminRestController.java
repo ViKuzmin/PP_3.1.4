@@ -1,6 +1,5 @@
 package crud.RESTController;
 
-import crud.exceptionhanling.UserIncorrectData;
 import crud.exceptionhanling.UserNotFoundException;
 import crud.models.User;
 import crud.service.UserServiceImpl;
@@ -9,60 +8,69 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api")
 public class AdminRestController {
 
+    private final UserServiceImpl userService;
+
     @Autowired
-    private UserServiceImpl userService;
+    public AdminRestController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
 
     @GetMapping("/users")
-    //@GetMapping
-    public List<User> showAll() {
+    //public List<User> showAll() {
+    public ResponseEntity<List<User>> showAll() {
         List<User> userList = userService.findAll();
-        return  userList;
+        return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
     //@GetMapping("/{id}")
-    public User getUserById(@PathVariable long id) {
+    //public User getUserById(@PathVariable long id) {
+    public ResponseEntity<User> getUserById(@PathVariable long id) {
         User user = userService.findById(id);
 
-        if(user.getId() == null) {
+        if (user.getId() == null) {
             throw new UserNotFoundException(String.format("User with id %s not exists.", id));
         }
-        return user;
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/users")
     //@PostMapping
-    public User addUser(@RequestBody User user) {
+    //public User addUser(@RequestBody User user) {
+    public ResponseEntity<User> addUser(@RequestBody User user) {
+
 
         userService.save(user);
-        return user;
+        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
     @PutMapping("/users")
-    //@PutMapping
-    public User updateUser(@RequestBody User user) {
+    //public User addUser(@RequestBody User user) {
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+
         userService.update(user);
-        return user;
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @DeleteMapping("/users/{id}")
-    public String deleteUser(@PathVariable long id) {
+    //public String deleteUser(@PathVariable long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable long id) {
 
         User user = userService.findById(id);
 
-        if(user.getId() == null) {
+        if (user.getId() == null) {
             throw new UserNotFoundException(String.format("User with id %s not exists", id));
         }
 
         userService.delete(id);
-        return String.format("User with id %s deleted", id);
+        return new ResponseEntity<>(String.format("User with id %s deleted", id), HttpStatus.OK);
     }
 }
