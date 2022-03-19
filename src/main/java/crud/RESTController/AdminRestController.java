@@ -23,15 +23,12 @@ public class AdminRestController {
 
 
     @GetMapping("/users")
-    //public List<User> showAll() {
     public ResponseEntity<List<User>> showAll() {
         List<User> userList = userService.findAll();
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
-    //@GetMapping("/{id}")
-    //public User getUserById(@PathVariable long id) {
     public ResponseEntity<User> getUserById(@PathVariable long id) {
         User user = userService.findById(id);
 
@@ -49,8 +46,6 @@ public class AdminRestController {
     }
 
     @PostMapping("/users")
-    //@PostMapping
-    //public User addUser(@RequestBody User user) {
     public ResponseEntity<User> addUser(@RequestBody User user) {
 
         userService.save(user);
@@ -58,7 +53,6 @@ public class AdminRestController {
     }
 
     @PutMapping("/users/{id}")
-    //public User addUser(@RequestBody User user) {
     public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable long id) {
 
 
@@ -67,7 +61,6 @@ public class AdminRestController {
     }
 
     @DeleteMapping("/users/{id}")
-    //public String deleteUser(@PathVariable long id) {
     public ResponseEntity<String> deleteUser(@PathVariable long id) {
 
         User user = userService.findById(id);
