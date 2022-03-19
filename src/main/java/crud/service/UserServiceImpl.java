@@ -4,12 +4,15 @@ import crud.models.Role;
 import crud.models.User;
 import crud.repository.RoleRepository;
 import crud.repository.UsersRepository;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.extras.springsecurity5.util.SpringSecurityContextUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -67,8 +70,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return true;
     }
 
-    public void update(User user) {
+    public void update(User user, long id) {
 
+        user.setId(id);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
@@ -84,6 +88,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<User> usergetList(Long idMin) {
         return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
                 .setParameter("paramId", idMin).getResultList();
+    }
+
+    public User getAuthUser() {
+
+        return userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
     public User findByUsername(String username) {

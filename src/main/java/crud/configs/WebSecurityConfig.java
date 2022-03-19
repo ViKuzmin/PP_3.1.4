@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/reg", "/start", "/admin/**", "/api/**").permitAll()
+                .antMatchers("/", "/reg", "/start", "/admin/**", "/api/**", "/git", "/asd", "/practicejs").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/");
+        http.httpBasic();
     }
 
     @Autowired

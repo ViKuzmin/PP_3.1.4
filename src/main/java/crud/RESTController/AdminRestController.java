@@ -41,22 +41,28 @@ public class AdminRestController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @GetMapping("/users/auth")
+    public ResponseEntity<User> getAuthUser() {
+
+        User user = userService.getAuthUser();
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     @PostMapping("/users")
     //@PostMapping
     //public User addUser(@RequestBody User user) {
     public ResponseEntity<User> addUser(@RequestBody User user) {
 
-
         userService.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
-    @PutMapping("/users")
+    @PutMapping("/users/{id}")
     //public User addUser(@RequestBody User user) {
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable long id) {
 
-        userService.update(user);
+
+        userService.update(user, id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

@@ -8,7 +8,147 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title>Admin</title>
 </head>
+<body><!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <title>Admin</title>
+</head>
 <body>
+<!--Navigation-->
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="background-color: rgb(37,33,33);">
+    <div class="container">
+        <a class="navbar-brand" href="#" style="color: #e1dcdc;" >val</a>
+    </div>
+
+    <div>
+        <a class="navbar-brand" href="/logout" style="color: #e1dcdc;">Logout</a>
+    </div>
+</nav>
+<!--Body-->
+<div class="row">
+    <!--2/12-->
+    <div class="col-2">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" sec:authorize="hasAuthority('ADMIN')">Admin</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile" sec:authorize="hasAuthority('USER')">User</a>
+        </div>
+    </div>
+    <!--10/12-->
+    <div class="col-10">
+        <div class="tab-content" id="nav-tabContent">
+            <!--Admin panel-->
+            <div sec:authorize="hasAuthority('ADMIN')" class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <!--start-->
+                <div class="col" style="padding: 0;">
+                    <h1 style="margin-left: 5px;">Admin panel</h1>
+                    <div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Users table</a></li>
+                            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">New user</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" role="tabpanel" id="tab-1">
+                                <p class="text-left" style="font-size: 25px;margin-left: 5px;">All user</p>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-left">ID</th>
+                                            <th class="text-center">First Name</th>
+                                            <th class="text-center">Last Name</th>
+                                            <th class="text-center">Age</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Role</th>
+                                            <th class="text-center">Edit</th>
+                                            <th class="text-center">Delete</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="allUsersTable">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="tab-2">
+                                <div class="container">
+                                    <div class="row" style="border: 1px black; background-color: #eee;"><h4>Add new User</h4></div>
+                                    <div class="row justify-content-center align-items-center text-center">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="firstName"><b>First Name</b></label>
+                                                <input type="text" class="form-control" id="firstName" minlength="2" maxlength="50"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastName"><b>Last Name</b></label>
+                                                <input type="text" class="form-control" id="lastName" minlength="2" maxlength="50"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="age"><b>Age</b></label>
+                                                <input type="number" id="age" class="form-control" min="6" max="120"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="username"><b>Email</b></label>
+                                                <input type="email" class="form-control" id="username"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password"><b>Password</b></label>
+                                                <input type="password" class="form-control" id="password"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Role</b></label>
+                                                <input type="checkbox" name="roles"
+                                                />
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Add new user</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end-->
+            </div>
+            <!--User panel-->
+            <div sec:authorize="hasAuthority('USER')" class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                <!--start-->
+                <div class="col" style="padding: 0;">
+                    <h1 style="margin-left: 5px;">User information-page</h1>
+                    <p style="font-size: 25px;margin-left: 5px;">About user</p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th class="text-center">First name</th>
+                                <th class="text-center">Last name</th>
+                                <th class="text-center">Age</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Role</th>
+                            </tr>
+                            </thead>
+                            <tbody class="oneUserTable">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--end-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/lib/app.js"></script>
+</body>
+</html>
 
 <h1>Hello world!</h1>
 
